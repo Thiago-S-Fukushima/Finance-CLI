@@ -4,7 +4,7 @@ import com.finance.entity.Lancamento;
 import com.finance.repository.LancamentoRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.List;
 
 @Service
 public class LancamentoService {

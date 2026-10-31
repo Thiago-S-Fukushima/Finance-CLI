@@ -33,13 +33,37 @@ public class FinanceApplication implements CommandLineRunner {
             LocalDate data = LocalDate.parse(dataText);
 
             Lancamento lancamento = new Lancamento(descricao, valor, data);
+
+            Lancamento salvo = lancamentoService.salvar(lancamento);
             
             System.out.println("Lançamento cadastrado com sucesso!");
+            System.out.println("ID gerado: " + salvo.getId());
         } catch(NumberFormatException e) {
             System.out.println("Valor inválido. Exemplo válido: 150,50");
         } catch (DateTimeParseException e) {
             System.out.println("Data inválida. Use o formato AAAA-MM-DD");
         }
+    }
+
+    private void listarLancamentos() {
+        System.out.println("\n===== LANÇAMENTOS CADASTRADOS =====");
+
+        var lancamentos = lancamentoService.listarTodos();
+
+        if(lancamentos.isEmpty()) {
+            System.out.println("Nenhum lançamentos cadastrado");
+            return;
+        }
+
+        for (var lancamento : lancamentos) {
+            System.out.println("-----------------------------");
+            System.out.println("ID: " + lancamento.getId());
+            System.out.println("Descrição: " + lancamento.getDescricao());
+            System.out.println("Valor: R$" + lancamento.getValor());
+            System.out.println("Data: " + lancamento.getData());
+        }
+
+        System.out.println("-----------------------------");
     }
 
     public FinanceApplication(LancamentoService lancamentoService) {
@@ -78,7 +102,7 @@ public class FinanceApplication implements CommandLineRunner {
                     cadastrarLancamento(scanner);
                     break;
                 case 2:
-                    System.out.println("Listagem de lançamentos");
+                    listarLancamentos();
                     break;
                 case 3:
                     System.out.println("Exclusão de lançamento");

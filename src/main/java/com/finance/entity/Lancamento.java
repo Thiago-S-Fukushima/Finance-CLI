@@ -1,11 +1,12 @@
 package com.finance.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
-
-import org.springframework.cglib.core.Local;
-
 
 @Entity
 public class Lancamento {
