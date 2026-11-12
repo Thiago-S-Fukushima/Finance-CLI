@@ -32,6 +32,16 @@ public class FinanceApplication implements CommandLineRunner {
             BigDecimal valor = new BigDecimal(valorText);
             LocalDate data = LocalDate.parse(dataText);
 
+            if(descricao.isBlank()) {
+                System.out.println("Preencha o campo em branco.");
+                return;
+            }
+
+            if(valor.compareTo(BigDecimal.ZERO) <= 0) {
+                System.out.println("O valor precisa ser maior que zero.");
+                return;
+            }
+
             Lancamento lancamento = new Lancamento(descricao, valor, data);
 
             Lancamento salvo = lancamentoService.salvar(lancamento);
